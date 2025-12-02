@@ -1,134 +1,189 @@
-# Contributing
+# Contributing to React Native macOS Video Processor
 
-Contributions are always welcome, no matter how large or small!
+Thank you for your interest in contributing! This document provides setup instructions and development guidelines.
 
-We want this community to be friendly and respectful to each other. Please follow it in all your interactions with the project. Before contributing, please read the [code of conduct](./CODE_OF_CONDUCT.md).
+## Development Setup
 
-## Development workflow
+### Prerequisites
 
-This project is a monorepo managed using [Yarn workspaces](https://yarnpkg.com/features/workspaces). It contains the following packages:
+- macOS 11.0 (Big Sur) or later
+- Xcode 13+
+- Node.js 18+
+- Yarn (this project uses Yarn workspaces)
+- CocoaPods
 
-- The library package in the root directory.
-- An example app in the `example/` directory.
+### Initial Setup
 
-To get started with the project, make sure you have the correct version of [Node.js](https://nodejs.org/) installed. See the [`.nvmrc`](./.nvmrc) file for the version used in this project.
+1. **Clone the repository:**
+   ```bash
+   git clone https://github.com/kiarashplusplus/react-native-macos-video-processor.git
+   cd react-native-macos-video-processor
+   ```
 
-Run `yarn` in the root directory to install the required dependencies for each package:
+2. **Install dependencies:**
+   ```bash
+   yarn install
+   ```
 
-```sh
-yarn
+3. **Set up the example app:**
+   ```bash
+   cd example
+   yarn install
+   ```
+
+4. **For macOS development, you'll need to manually add macOS support:**
+   - The library is structured for macOS but uses the `ios/` directory (React Native convention)
+   - Native code is in `ios/VideoProcessor.swift` and `ios/VideoProcessor.m`
+
+### Running the Example App
+
+```bash
+# From the root directory
+yarn example macos
 ```
 
-> Since the project relies on Yarn workspaces, you cannot use [`npm`](https://github.com/npm/cli) for development without manually migrating.
+## Project Structure
 
-The [example app](/example/) demonstrates usage of the library. You need to run it to test any changes you make.
-
-It is configured to use the local version of the library, so any changes you make to the library's source code will be reflected in the example app. Changes to the library's JavaScript code will be reflected in the example app without a rebuild, but native code changes will require a rebuild of the example app.
-
-You can use various commands from the root directory to work with the project.
-
-To start the packager:
-
-```sh
-yarn example start
+```
+react-native-macos-video-processor/
+├── src/                      # TypeScript source code
+│   ├── index.tsx            # Main API exports
+│   ├── types.ts             # Type definitions
+│   └── NativeVideoProcessor.ts  # Native module interface
+├── ios/                      # macOS/iOS native code
+│   ├── VideoProcessor.swift  # Swift implementation
+│   └── VideoProcessor.m      # Objective-C bridge
+├── example/                  # Example app
+│   └── src/
+│       └── App.tsx          # Example app UI
+└── __tests__/               # Tests
 ```
 
-To run the example app on Android:
+## Development Workflow
 
-```sh
-yarn example android
-```
+### Making Changes
 
-To run the example app on iOS:
+1. **TypeScript changes:** Edit files in `src/`
+2. **Swift changes:** Edit files in `ios/`
+3. **Example app:** Test your changes in `example/src/App.tsx`
 
-```sh
-yarn example ios
-```
+### Building
 
-To confirm that the app is running with the new architecture, you can check the Metro logs for a message like this:
+```bash
+# Build the library
+yarn prepare
 
-```sh
-Running "MacosVideoProcessorExample" with {"fabric":true,"initialProps":{"concurrentRoot":true},"rootTag":1}
-```
-
-Note the `"fabric":true` and `"concurrentRoot":true` properties.
-
-To run the example app on Web:
-
-```sh
-yarn example web
-```
-
-Make sure your code passes TypeScript:
-
-```sh
+# Type checking
 yarn typecheck
-```
 
-To check for linting errors, run the following:
-
-```sh
+# Linting
 yarn lint
 ```
 
-To fix formatting errors, run the following:
+### Testing
 
-```sh
-yarn lint --fix
-```
-
-Remember to add tests for your change if possible. Run the unit tests by:
-
-```sh
+```bash
+# Run tests
 yarn test
 ```
 
+## Code Style
 
-### Commit message convention
+- **TypeScript:** Follow ESLint + Prettier configuration
+- **Swift:** Use standard Swift conventions
+  - 2-space indentation
+  - Modern async/await patterns
+  - Comprehensive error handling
 
-We follow the [conventional commits specification](https://www.conventionalcommits.org/en) for our commit messages:
+## Pull Request Process
 
-- `fix`: bug fixes, e.g. fix crash due to deprecated method.
-- `feat`: new features, e.g. add new method to the module.
-- `refactor`: code refactor, e.g. migrate from class components to hooks.
-- `docs`: changes into documentation, e.g. add usage example for the module.
-- `test`: adding or updating tests, e.g. add integration tests using detox.
-- `chore`: tooling changes, e.g. change CI config.
+1. Fork the repository
+2. Create a feature branch (`git checkout -b feature/amazing-feature`)
+3. Make your changes
+4. Run tests and linting (`yarn test && yarn lint`)
+5. Commit your changes using conventional commits
+6. Push to your fork
+7. Open a pull request
 
-Our pre-commit hooks verify that your commit message matches this format when committing.
+### Commit Convention
 
+This project uses [Conventional Commits](https://www.conventionalcommits.org/):
 
-### Publishing to npm
+- `feat:` New feature
+- `fix:` Bug fix
+- `docs:` Documentation changes
+- `style:` Code style changes (formatting)
+- `refactor:` Code refactoring
+- `test:` Test changes
+- `chore:` Build/tooling changes
 
-We use [release-it](https://github.com/release-it/release-it) to make it easier to publish new versions. It handles common tasks like bumping version based on semver, creating tags and releases etc.
+Example:
+```bash
+git commit -m "feat: add video reversal support"
+git commit -m "fix: handle edge case in speed processing"
+```
 
-To publish new versions, run the following:
+## Adding New Features
 
-```sh
+### 1. TypeScript API
+Update `src/types.ts` and `src/index.tsx` with new types and functions.
+
+### 2. Native Module Interface
+Update `src/NativeVideoProcessor.ts` to declare new native methods.
+
+### 3. Swift Implementation
+Add implementation in `ios/VideoProcessor.swift`.
+
+### 4. Objective-C Bridge
+Expose new methods in `ios/VideoProcessor.m`.
+
+### 5. Documentation
+Update `README.md` with usage examples.
+
+### 6. Example App
+Add UI to test the new feature in `example/src/App.tsx`.
+
+## Native Development Tips
+
+### Swift/AVFoundation
+
+- Use modern `async/await` patterns
+- Load asset properties asynchronously: `try await asset.load(.duration)`
+- Use `AVAssetExportSession` for exports
+- Implement progress reporting via `Timer` or `AsyncSequence`
+
+### Error Handling
+
+- Map Swift errors to typed JavaScript errors
+- Use the `VideoProcessorError` enum
+- Provide clear, actionable error messages
+
+### Performance
+
+- Video processing is CPU/GPU intensive
+- Use background threads for heavy operations
+- Report progress frequently (every 0.1s recommended)
+
+## Release Process
+
+Releases are automated using `release-it`:
+
+```bash
 yarn release
 ```
 
+This will:
+1. Bump version in `package.json`
+2. Generate changelog
+3. Create git tag
+4. Push to GitHub
+5. Publish to npm (maintainers only)
 
-### Scripts
+## Questions?
 
-The `package.json` file contains various scripts for common tasks:
+- Open an issue for bugs or feature requests
+- Contact: kiarasha@alum.mit.edu
 
-- `yarn`: setup project by installing dependencies.
-- `yarn typecheck`: type-check files with TypeScript.
-- `yarn lint`: lint files with [ESLint](https://eslint.org/).
-- `yarn test`: run unit tests with [Jest](https://jestjs.io/).
-- `yarn example start`: start the Metro server for the example app.
-- `yarn example android`: run the example app on Android.
-- `yarn example ios`: run the example app on iOS.
+## License
 
-### Sending a pull request
-
-> **Working on your first pull request?** You can learn how from this _free_ series: [How to Contribute to an Open Source Project on GitHub](https://app.egghead.io/playlists/how-to-contribute-to-an-open-source-project-on-github).
-
-When you're sending a pull request:
-
-- Prefer small pull requests focused on one change.
-- Verify that linters and tests are passing.
-- Review the documentation to make sure it looks good.
-- Follow the pull request template when opening a pull request.
-- For pull requests that change the API or implementation, discuss with maintainers first by opening an issue.
+Apache-2.0 - see [LICENSE](LICENSE) for details.
