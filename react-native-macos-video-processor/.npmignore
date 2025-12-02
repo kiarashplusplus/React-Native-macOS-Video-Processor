@@ -1,0 +1,16 @@
+# Exclude development and testing files from npm package
+test-assets/
+example/
+.github/
+*.md
+!README.md
+!LICENSE
+check-swift.sh
+MANUAL_TEST.md
+SETUP.md
+TESTING.md
+.DS_Store
+*.log
+.yarn/
+.yarnrc.yml
+node_modules/
