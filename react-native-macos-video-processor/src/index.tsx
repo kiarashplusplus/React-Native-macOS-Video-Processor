@@ -109,7 +109,7 @@ export async function processVideo(
   if (onProgress) {
     progressSubscription = eventEmitter.addListener(
       'VideoProcessorProgress',
-      (event: { progress: number }) => {
+      (event: any) => {
         onProgress(event.progress);
       }
     );
@@ -180,7 +180,7 @@ export async function trimVideo(options: TrimOptions): Promise<string> {
   if (onProgress) {
     progressSubscription = eventEmitter.addListener(
       'VideoProcessorProgress',
-      (event: { progress: number }) => {
+      (event: any) => {
         onProgress(event.progress);
       }
     );
@@ -322,7 +322,7 @@ export async function adjustVolume(options: VolumeOptions): Promise<string> {
   if (onProgress) {
     progressSubscription = eventEmitter.addListener(
       'VideoProcessorProgress',
-      (event: { progress: number }) => {
+      (event: any) => {
         onProgress(event.progress);
       }
     );
