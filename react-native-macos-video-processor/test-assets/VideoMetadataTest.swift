@@ -4,6 +4,7 @@ import AVFoundation
 // MARK: - Standalone Video Metadata Extractor
 // This tests the core AVFoundation logic without React Native
 
+@available(macOS 12.0, *)
 @main
 struct VideoMetadataTest {
     static func main() async {
@@ -45,7 +46,6 @@ struct VideoMetadataTest {
         
         // Load properties asynchronously
         let duration = try await asset.load(.duration)
-        let tracks = try await asset.load(.tracks)
         
         var metadata = VideoMetadata()
         metadata.duration = duration.seconds
