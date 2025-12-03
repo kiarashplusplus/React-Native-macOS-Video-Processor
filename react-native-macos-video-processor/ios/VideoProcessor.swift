@@ -77,6 +77,10 @@ class VideoProcessor: RCTEventEmitter {
     private var currentExportSession: AVAssetExportSession?
     private var progressTimer: Timer?
     
+    override init() {
+        super.init()
+    }
+    
     // MARK: - RCTEventEmitter Overrides
     
     override func supportedEvents() -> [String]! {
@@ -84,7 +88,7 @@ class VideoProcessor: RCTEventEmitter {
     }
     
     override static func requiresMainQueueSetup() -> Bool {
-        return false
+        return true
     }
     
     // MARK: - Process Video with Speed Adjustment
