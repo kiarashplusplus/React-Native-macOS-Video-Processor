@@ -188,7 +188,17 @@ class VideoProcessor: RCTEventEmitter {
         startProgressMonitoring(exportSession: exportSession)
         
         // Export
-        try await exportSession.export(to: outputURL, as: .mp4)
+        try await withCheckedThrowingContinuation { (continuation: CheckedContinuation<Void, Error>) in
+            exportSession.exportAsynchronously {
+                if exportSession.status == .completed {
+                    continuation.resume()
+                } else if let error = exportSession.error {
+                    continuation.resume(throwing: error)
+                } else {
+                    continuation.resume(throwing: VideoProcessorError.exportFailed)
+                }
+            }
+        }
         
         // Stop progress monitoring
         stopProgressMonitoring()
@@ -414,7 +424,17 @@ class VideoProcessor: RCTEventEmitter {
         self.currentExportSession = exportSession
         startProgressMonitoring(exportSession: exportSession)
         
-        try await exportSession.export(to: outputURL, as: .mp4)
+        try await withCheckedThrowingContinuation { (continuation: CheckedContinuation<Void, Error>) in
+            exportSession.exportAsynchronously {
+                if exportSession.status == .completed {
+                    continuation.resume()
+                } else if let error = exportSession.error {
+                    continuation.resume(throwing: error)
+                } else {
+                    continuation.resume(throwing: VideoProcessorError.exportFailed)
+                }
+            }
+        }
         
         stopProgressMonitoring()
         
@@ -651,7 +671,17 @@ class VideoProcessor: RCTEventEmitter {
         self.currentExportSession = exportSession
         startProgressMonitoring(exportSession: exportSession)
         
-        try await exportSession.export(to: outputURL, as: .mp4)
+        try await withCheckedThrowingContinuation { (continuation: CheckedContinuation<Void, Error>) in
+            exportSession.exportAsynchronously {
+                if exportSession.status == .completed {
+                    continuation.resume()
+                } else if let error = exportSession.error {
+                    continuation.resume(throwing: error)
+                } else {
+                    continuation.resume(throwing: VideoProcessorError.exportFailed)
+                }
+            }
+        }
         
         stopProgressMonitoring()
         
