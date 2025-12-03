@@ -3,7 +3,7 @@
 A production-ready React Native library that bridges JavaScript with Apple's AVFoundation framework to enable native-speed video processing on macOS. Built as a reusable npm package for creating high-performance video manipulation applications.
 
 [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](LICENSE)
-[![Platform](https://img.shields.io/badge/platform-macOS%2011%2B-lightgrey.svg)](https://www.apple.com/macos/)
+[![Platform](https://img.shields.io/badge/platform-macOS%2012%2B-lightgrey.svg)](https://www.apple.com/macos/)
 [![React Native](https://img.shields.io/badge/React%20Native-0.68%2B-61dafb.svg)](https://reactnative.dev/)
 [![npm version](https://img.shields.io/npm/v/react-native-macos-video-processor.svg?style=flat)](https://www.npmjs.com/package/react-native-macos-video-processor)
 
@@ -261,7 +261,7 @@ enum VideoProcessorErrorCode {
 
 ### Requirements
 
-- macOS 11.0 (Big Sur) or later
+- macOS 12.0 (Monterey) or later (Required for async/await APIs)
 - React Native 0.68+
 - Xcode 13+
 

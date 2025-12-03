@@ -95,21 +95,48 @@ Recommended test files:
 - High-resolution video for metadata testing
 - Various codec files (H.264, HEVC)
 
+## Integration Testing (macOS App)
+
+To run the full integration test with the example app:
+
+```bash
+cd example-macos
+npx react-native run-macos
+```
+
+This will launch the macOS app where you can manually test all features (speed, trim, metadata, etc.) with real UI feedback.
+
+## Standalone Swift Tests
+
+To verify the underlying Swift logic without the full React Native app:
+
+**Speed Processing Test:**
+```bash
+cd react-native-macos-video-processor
+./test-assets/build-speed-test.sh
+```
+
+**Metadata Extraction Test:**
+```bash
+cd react-native-macos-video-processor
+./test-assets/build-test.sh
+```
+
 ## Current Status
 
 ✅ **Completed:**
 - TypeScript API implementation
-- Swift native module implementation  
+- Swift native module implementation
 - Example app UI
 - TypeScript compilation verification
 - Build system validation
 - **Metadata extraction test** ✅ PASSING
 - **Speed processing test (2x)** ✅ PASSING
+- **Library Compilation** ✅ PASSING
+- **macOS App Build** ✅ PASSING (Runtime crash fixed)
 
 ⏳ **Pending:**
-- Swift compilation in React Native context (requires full Xcode build)
-- Full React Native macOS integration
-- Testing with React Native app
+- Full manual end-to-end verification of all features in the app
 - Performance benchmarking
 
 ## Test Results Summary

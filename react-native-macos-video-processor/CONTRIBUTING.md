@@ -6,7 +6,7 @@ Thank you for your interest in contributing! This document provides setup instru
 
 ### Prerequisites
 
-- macOS 11.0 (Big Sur) or later
+- macOS 12.0 (Monterey) or later (Required for modern async/await AVFoundation APIs)
 - Xcode 13+
 - Node.js 18+
 - Yarn (this project uses Yarn workspaces)
@@ -163,6 +163,16 @@ Add UI to test the new feature in `example/src/App.tsx`.
 - Video processing is CPU/GPU intensive
 - Use background threads for heavy operations
 - Report progress frequently (every 0.1s recommended)
+
+### React Native macOS Specifics
+
+- **Main Queue Setup**: Always set `requiresMainQueueSetup` to `true` in your Swift module.
+  ```swift
+  override static func requiresMainQueueSetup() -> Bool {
+      return true
+  }
+  ```
+  *Reason: Initializing on a background thread can cause runtime crashes on macOS, even if the module logic is thread-safe.*
 
 ## Release Process
 
