@@ -38,7 +38,7 @@ RCT_EXTERN_METHOD(cancelProcessing)
 
 + (BOOL)requiresMainQueueSetup
 {
-  return NO;
+  return YES;
 }
 
 @end

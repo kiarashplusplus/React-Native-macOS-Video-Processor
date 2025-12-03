@@ -133,7 +133,9 @@ cd react-native-macos-video-processor
 - **Metadata extraction test** ✅ PASSING
 - **Speed processing test (2x)** ✅ PASSING
 - **Library Compilation** ✅ PASSING
-- **macOS App Build** ✅ PASSING (Runtime crash fixed)
+- **macOS App Build** ✅ PASSING (Runtime crash fixed - Dec 3, 2025)
+  - **Fix:** Changed `requiresMainQueueSetup` from `NO` to `YES` in `VideoProcessor.m`
+  - **Root Cause:** Objective-C bridge was overriding Swift implementation, causing background thread initialization
 
 ⏳ **Pending:**
 - Full manual end-to-end verification of all features in the app
