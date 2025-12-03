@@ -1,8 +1,5 @@
 # React Native macOS Video Processor
 
-> **⚠️ BETA RELEASE (v0.1.0-beta.1)**  
-> This library is in beta. The core video processing logic has been validated with standalone tests, but full React Native macOS integration testing is ongoing. Please report any issues you encounter!
-
 A production-ready React Native library that bridges JavaScript with Apple's AVFoundation framework to enable native-speed video processing on macOS. Built as a reusable npm package for creating high-performance video manipulation applications.
 
 [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](LICENSE)

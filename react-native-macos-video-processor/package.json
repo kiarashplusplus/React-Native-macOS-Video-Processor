@@ -1,6 +1,6 @@
 {
   "name": "react-native-macos-video-processor",
-  "version": "0.1.0-beta.1",
+  "version": "0.1.0",
   "description": "A production-ready React Native library that bridges JavaScript with Apple's AVFoundation framework to enable native-speed video processing on macOS. Built as a reusable npm package for creating high-performance video manipulation applications.",
   "main": "./lib/module/index.js",
   "types": "./lib/typescript/src/index.d.ts",

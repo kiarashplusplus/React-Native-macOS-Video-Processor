@@ -1,5 +1,16 @@
 # Changelog
 
+## [0.1.0] - 2024-12-02
+
+### 🎉 First Stable Release!
+
+Promoted from beta to stable after successful publication and initial validation.
+
+**What's New:**
+- Stable 0.1.0 release (no breaking changes from beta)
+- Core features validated with standalone tests
+- Production-ready for macOS video processing
+
 ## [0.1.0-beta.1] - 2024-12-02
 
 ### 🎉 Initial Beta Release
