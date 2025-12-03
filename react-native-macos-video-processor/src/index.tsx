@@ -30,7 +30,7 @@ if (!VideoProcessorModule) {
 }
 
 // Event emitter for progress updates
-const eventEmitter = new NativeEventEmitter(NativeModules.VideoProcessor);
+const eventEmitter = new NativeEventEmitter(VideoProcessorModule);
 
 /**
  * Preset configurations mapped to speed segments

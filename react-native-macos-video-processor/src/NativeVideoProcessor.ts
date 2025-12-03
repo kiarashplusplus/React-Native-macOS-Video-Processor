@@ -69,4 +69,6 @@ export interface Spec extends TurboModule {
     cancelProcessing(): void;
 }
 
-export default TurboModuleRegistry.getEnforcing<Spec>('VideoProcessor');
+// Use get() instead of getEnforcing() to support legacy native modules
+// getEnforcing() throws an error if TurboModules aren't available
+export default TurboModuleRegistry.get<Spec>('VideoProcessor');

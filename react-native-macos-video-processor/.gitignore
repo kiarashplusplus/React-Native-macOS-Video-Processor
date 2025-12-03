@@ -84,3 +84,11 @@ android/generated
 
 # React Native Nitro Modules
 nitrogen/
+
+# Test artifacts
+swift_check.log
+test-assets/*.log
+test-assets/test-output-*.mov
+test-assets/test-output-*.mp4
+test-assets/VideoMetadataTest
+test-assets/VideoSpeedTest
